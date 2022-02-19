@@ -13,7 +13,7 @@ provider:
   name: aws
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
-  region: sa-east-1
+  region: ${aws:region}
   environment:
     SLS_DEBUG: "*"
   iam:
@@ -25,8 +25,8 @@ provider:
             - dynamodb:PutItem
             - dynamodb:BatchWriteItem
           Resource:
-            - arn:aws:dynamodb:sa-east-1:027241190986:table/locations
-            - arn:aws:dynamodb:sa-east-1:027241190986:table/offers
+            - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/locations
+            - arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/offers
 functions:
   listLocations:
     handler: src/locations/locationsController.listLocations
