@@ -1,0 +1,30 @@
+{
+  "name": "be-techtest-cesarjunior",
+  "version": "1.0.0",
+  "repository": "git@github.com:fidelapi-challenges/be-techtest-cesarjunior.git",
+  "author": "César Júnior",
+  "license": "MIT",
+  "scripts": {
+    "sls:offline": "nodemon",
+    "sls:deploy": "serverless deploy --verbose",
+    "sls:remove": "serverless remove --verbose",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1046.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.88",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.4.0",
+    "faker": "^5.5.3",
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "serverless": "^2.69.1",
+    "serverless-bundle": "^5.2.0",
+    "serverless-offline": "^8.3.1",
+    "ts-jest": "^27.1.2",
+    "typescript": "^4.5.4"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "watch": ["src", "serverless.yml"],
+  "ext": "ts",
+  "exec" :"sls offline"
+}

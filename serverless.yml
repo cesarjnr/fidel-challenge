@@ -1,0 +1,54 @@
+service: be-techtest
+configValidationMode: warn
+package:
+  individually: true
+plugins:
+  - serverless-offline
+  - serverless-bundle
+custom:
+  bundle:
+    excludeFiles: "**/*spec.ts"
+    linting: false
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: sa-east-1
+  environment:
+    SLS_DEBUG: "*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Scan
+            - dynamodb:PutItem
+            - dynamodb:BatchWriteItem
+          Resource:
+            - arn:aws:dynamodb:sa-east-1:027241190986:table/locations
+            - arn:aws:dynamodb:sa-east-1:027241190986:table/offers
+functions:
+  listLocations:
+    handler: src/locations/locationsController.listLocations
+    events:
+      - httpApi:
+          method: GET
+          path: /locations
+  listOffers:
+    handler: src/offers/offersController.listOffers
+    events:
+      - httpApi:
+          method: GET
+          path: /offers
+  linkLocationToOffer:
+    handler: src/offers/offersController.linkLocationToOffer
+    events:
+      - httpApi:
+          method: POST
+          path: /offers/{offerId}/locations/{locationId}
+  linkAllBrandLocationsToOffer:
+    handler: src/offers/offersController.linkAllBrandLocationsToOffer
+    events:
+      - httpApi:
+          method: POST
+          path: /offers/{offerId}/brands/{brandId}
